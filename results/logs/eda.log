@@ -1,0 +1,158 @@
+<frozen runpy>:130: RuntimeWarning: 'utils.eda' found in sys.modules after import of package 'utils', but prior to execution of 'utils.eda'; this may result in unpredictable behaviour
+
+========================================================================================
+ELEC 475: RUNNING DUAL-DATASET EXPLORATORY DATA ANALYSIS (CIFAR-10 & TINY IMAGENET-200)
+========================================================================================
+
+========================================================================================
+ELEC 475: EXPLORATORY DATA ANALYSIS - DATASET: CIFAR10
+========================================================================================
+
+[Dataset Inventory & Technical Profile]
+  Dataset Name              : CIFAR10
+  Total Training Samples    : 50,000
+  Number of Classes (C)     : 10
+  Native Image Resolution   : 32 x 32 x 3
+  Standardized Model Shape  : 3 x 64 x 64 (Tensor: float32, range [0.0, 1.0])
+  Approximate Disk Storage  : 177.6 MB
+
+[Pillar 1: Class Balance, Frequency Profiling & Imbalance Diagnostics]
+  Samples Per Class (Mean)  : 5000.0 (Median: 5000.0, Std: 0.00)
+  Class Range [Min, Max]    : [5000, 5000]
+  Imbalance Ratio (IR)      : 1.00
+  Shannon Entropy (H)       : 3.3219 bits (Max possible: 3.3219 bits)
+  Entropy Ratio (H / H_max) : 1.0000 (1.0 = perfectly uniform distribution)
+  Gini Impurity Index       : 0.9000
+  Per-Class Distribution Breakdown:
+    Class 00 (airplane      ):  5000 images ( 10.0%)
+    Class 01 (automobile    ):  5000 images ( 10.0%)
+    Class 02 (bird          ):  5000 images ( 10.0%)
+    Class 03 (cat           ):  5000 images ( 10.0%)
+    Class 04 (deer          ):  5000 images ( 10.0%)
+    Class 05 (dog           ):  5000 images ( 10.0%)
+    Class 06 (frog          ):  5000 images ( 10.0%)
+    Class 07 (horse         ):  5000 images ( 10.0%)
+    Class 08 (ship          ):  5000 images ( 10.0%)
+    Class 09 (truck         ):  5000 images ( 10.0%)
+  Dataset Balance Status    : PERFECTLY BALANCED
+  Metric Recommendation     :
+  Because class frequencies are uniformly distributed across categories, standard Top-1 Accuracy
+  is mathematically sound and unskewed. However, modern peer-reviewed venues (CVPR, NeurIPS, ICLR)
+  mandate reporting Macro F1 alongside Top-1 Accuracy to confirm balanced discriminative power
+  across all fine-grained categories.
+  --> Saved Class Distribution Plot to: ./plots/eda_cifar10_class_distribution.png
+
+[Pillar 2: Pixel Intensity Statistics & RGB Channel Dynamics]
+  Computing exact dataset-wide RGB channel means, standard deviations, and dynamic range...
+  Dynamic Range [Min, Max]  : [0.0000, 1.0000] (Expected: [0.0000, 1.0000])
+  Empirical Mean (R, G, B)  : [0.4923, 0.4831, 0.4474]
+  Empirical Std  (R, G, B)  : [0.2404, 0.2370, 0.2557]
+  Red Channel Percentiles   : P1=0.027, P25=0.314, Median=0.486, P75=0.663, P99=0.996
+  Inter-Channel Correlation Matrix:
+    R-G Corr: 0.899 | R-B Corr: 0.773 | G-B Corr: 0.904
+
+  Recommended Normalization Transform:
+  transforms.Normalize(
+      mean=[0.4923, 0.4831, 0.4474],
+      std=[0.2404, 0.2370, 0.2557]
+  )
+  --> Saved Channel Histograms to: ./plots/eda_cifar10_channel_histograms.png
+
+[Pillar 3: Data Integrity, Outlier & Quality Diagnostics]
+  Corrupt File Exceptions   : 0 (Passed)
+  NaN / Inf Representation  : 0 (Passed)
+  Dead / Blank Frames       : 0 (Images with Var < 1e-4)
+  Extreme Dark Outliers     : 1 (Images with Mean < 0.05)
+  Extreme Bright Outliers   : 4 (Images with Mean > 0.95)
+  Integrity Status          : 100% CLEAN & VERIFIED FOR TRAINING
+
+[Pillar 4: Visual Inspection & Stratified Sample Grid]
+  --> Saved Visual Sample Grid to: ./plots/eda_cifar10_sample_grid.png
+========================================================================================
+EDA for CIFAR10 Complete! All statistical profiling and plots successfully generated.
+========================================================================================
+
+========================================================================================
+ELEC 475: EXPLORATORY DATA ANALYSIS - DATASET: TINY_IMAGENET
+========================================================================================
+
+[Dataset Inventory & Technical Profile]
+  Dataset Name              : TINY_IMAGENET
+  Total Training Samples    : 100,000
+  Number of Classes (C)     : 200
+  Native Image Resolution   : 64 x 64 x 3
+  Standardized Model Shape  : 3 x 64 x 64 (Tensor: float32, range [0.0, 1.0])
+  Approximate Disk Storage  : 331.2 MB
+
+[Pillar 1: Class Balance, Frequency Profiling & Imbalance Diagnostics]
+  Samples Per Class (Mean)  : 500.0 (Median: 500.0, Std: 0.00)
+  Class Range [Min, Max]    : [500, 500]
+  Imbalance Ratio (IR)      : 1.00
+  Shannon Entropy (H)       : 7.6439 bits (Max possible: 7.6439 bits)
+  Entropy Ratio (H / H_max) : 1.0000 (1.0 = perfectly uniform distribution)
+  Gini Impurity Index       : 0.9950
+  (Displaying first 10 of 200 categories):
+    Class 000 (n01443537     ):   500 images (  0.5%)
+    Class 001 (n01629819     ):   500 images (  0.5%)
+    Class 002 (n01641577     ):   500 images (  0.5%)
+    Class 003 (n01644900     ):   500 images (  0.5%)
+    Class 004 (n01698640     ):   500 images (  0.5%)
+    Class 005 (n01742172     ):   500 images (  0.5%)
+    Class 006 (n01768244     ):   500 images (  0.5%)
+    Class 007 (n01770393     ):   500 images (  0.5%)
+    Class 008 (n01774384     ):   500 images (  0.5%)
+    Class 009 (n01774750     ):   500 images (  0.5%)
+    ... [190 additional classes with 500 images each] ...
+  Dataset Balance Status    : PERFECTLY BALANCED
+  Metric Recommendation     :
+  Because class frequencies are uniformly distributed across categories, standard Top-1 Accuracy
+  is mathematically sound and unskewed. However, modern peer-reviewed venues (CVPR, NeurIPS, ICLR)
+  mandate reporting Macro F1 alongside Top-1 Accuracy to confirm balanced discriminative power
+  across all fine-grained categories.
+  --> Saved Class Distribution Plot to: ./plots/eda_tiny_imagenet_class_distribution.png
+
+[Pillar 2: Pixel Intensity Statistics & RGB Channel Dynamics]
+  Computing exact dataset-wide RGB channel means, standard deviations, and dynamic range...
+  Dynamic Range [Min, Max]  : [0.0000, 1.0000] (Expected: [0.0000, 1.0000])
+  Empirical Mean (R, G, B)  : [0.4801, 0.4481, 0.3982]
+  Empirical Std  (R, G, B)  : [0.2754, 0.2684, 0.2803]
+  Red Channel Percentiles   : P1=0.004, P25=0.251, Median=0.439, P75=0.639, P99=1.000
+  Inter-Channel Correlation Matrix:
+    R-G Corr: 0.866 | R-B Corr: 0.706 | G-B Corr: 0.860
+
+  Recommended Normalization Transform:
+  transforms.Normalize(
+      mean=[0.4801, 0.4481, 0.3982],
+      std=[0.2754, 0.2684, 0.2803]
+  )
+  --> Saved Channel Histograms to: ./plots/eda_tiny_imagenet_channel_histograms.png
+
+[Pillar 3: Data Integrity, Outlier & Quality Diagnostics]
+  Corrupt File Exceptions   : 0 (Passed)
+  NaN / Inf Representation  : 0 (Passed)
+  Dead / Blank Frames       : 0 (Images with Var < 1e-4)
+  Extreme Dark Outliers     : 50 (Images with Mean < 0.05)
+  Extreme Bright Outliers   : 29 (Images with Mean > 0.95)
+  Integrity Status          : 100% CLEAN & VERIFIED FOR TRAINING
+
+[Pillar 4: Visual Inspection & Stratified Sample Grid]
+  --> Saved Visual Sample Grid to: ./plots/eda_tiny_imagenet_sample_grid.png
+========================================================================================
+EDA for TINY_IMAGENET Complete! All statistical profiling and plots successfully generated.
+========================================================================================
+
+========================================================================================
+COMPARATIVE EDA SUMMARY: CIFAR-10 vs. TINY IMAGENET-200
+========================================================================================
+Feature / Metric                 | CIFAR-10                  | Tiny ImageNet-200        
+----------------------------------------------------------------------------------------
+Number of Classes (C)            | 10                        | 200                      
+Total Training Samples (N)       | 50000,,,,,,,,,,,,,,,,,,,, | 100000,,,,,,,,,,,,,,,,,,,
+Samples Per Class                | 5000                      | 500                      
+Imbalance Ratio (Max/Min)        | 1.00                      | 1.00                     
+Class Entropy Ratio (H/H_max)    | 1.0000                    | 1.0000                   
+Dataset Balance Status           | PERFECTLY BALANCED        | PERFECTLY BALANCED       
+Empirical RGB Mean               | [0.4923, 0.4831, 0.4474]  | [0.4801, 0.4481, 0.3982] 
+Empirical RGB Std                | [0.2404, 0.237, 0.2557]   | [0.2754, 0.2684, 0.2803] 
+Primary Recommended Metric       | Top-1 Acc & Macro F1      | Top-1 Acc & Macro F1     
+========================================================================================

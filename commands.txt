@@ -1,0 +1,61 @@
+ELEC 475 Lab 2 - exact commands (run from the project root, Python 3.10+, pip install -r requirements.txt)
+
+# One command that runs everything below, skips finished runs, and builds the report inputs:
+python run_all.py
+python make_report.py --name "<full name>" --student-number <student_number>
+
+# Note: rows 3-5 of the ablation ladder are trained with --no-augment so that 'Data Augmentation = None'
+# (augmentation is ON by default in train.py once implemented). Extra seeds and the extended study use
+# --seed / --lr / --batch-size as shown.
+
+# CIFAR-10 mandatory runs (seed 42)
+python train.py --model lenet --dataset cifar10 --epochs 10 --no-augment --save-model checkpoints/lenet_baseline.pth --plot-file plots/loss_lenet.png --results-json results/c10_lenet.json
+python train.py --model lenet_modern --dataset cifar10 --epochs 10 --no-augment --save-model checkpoints/lenet_modern.pth --plot-file plots/loss_lenet_modern.png --results-json results/c10_lenet_modern.json
+python train.py --model alexnet --norm none --dataset cifar10 --epochs 10 --no-augment --save-model checkpoints/alexnet_none.pth --plot-file plots/loss_alexnet_none.png --results-json results/c10_alex_none.json
+python train.py --model alexnet --norm lrn --dataset cifar10 --epochs 10 --no-augment --save-model checkpoints/alexnet_lrn.pth --plot-file plots/loss_alexnet_lrn.png --results-json results/c10_alex_lrn.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10 --no-augment --save-model checkpoints/alexnet_bn.pth --plot-file plots/loss_alexnet_bn.png --results-json results/c10_alex_bn.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 15 --no-augment --save-model checkpoints/alexnet_no_aug.pth --plot-file plots/loss_no_aug.png --results-json results/c10_alex_bn_noaug15.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 15 --save-model checkpoints/alexnet_with_aug.pth --plot-file plots/loss_with_aug.png --results-json results/c10_alex_bn_aug15.json
+python train.py --model zoo_alexnet --dataset cifar10 --epochs 10 --no-augment --plot-file plots/loss_zoo_alexnet.png --results-json results/c10_zoo.json
+
+# Tiny ImageNet-200 runs (seed 42)
+python train.py --model lenet --dataset tiny_imagenet --epochs 5 --no-augment --plot-file plots/loss_t200_lenet.png --results-json results/t200_lenet.json
+python train.py --model lenet_modern --dataset tiny_imagenet --epochs 5 --no-augment --plot-file plots/loss_t200_lenet_modern.png --results-json results/t200_lenet_modern.json
+python train.py --model alexnet --norm none --dataset tiny_imagenet --epochs 5 --no-augment --plot-file plots/loss_t200_alex_none.png --results-json results/t200_alex_none.json
+python train.py --model alexnet --norm lrn --dataset tiny_imagenet --epochs 5 --no-augment --plot-file plots/loss_t200_alex_lrn.png --results-json results/t200_alex_lrn.json
+python train.py --model alexnet --norm bn --dataset tiny_imagenet --epochs 5 --no-augment --plot-file plots/loss_t200_alex_bn.png --results-json results/t200_alex_bn.json
+python train.py --model alexnet --norm bn --dataset tiny_imagenet --epochs 5 --save-model checkpoints/alexnet_tiny_imagenet.pth --plot-file plots/loss_tiny_imagenet.png --results-json results/t200_alex_bn_aug.json
+python train.py --model zoo_alexnet --dataset tiny_imagenet --epochs 5 --lr 0.0001 --no-augment --plot-file plots/loss_t200_zoo.png --results-json results/t200_zoo.json
+
+# Extra seeds for Mean +/- Std (CIFAR-10)
+python train.py --model lenet --dataset cifar10 --epochs 10 --seed 43 --no-augment --results-json results/c10_lenet_s43.json
+python train.py --model lenet --dataset cifar10 --epochs 10 --seed 44 --no-augment --results-json results/c10_lenet_s44.json
+python train.py --model lenet_modern --dataset cifar10 --epochs 10 --seed 43 --no-augment --results-json results/c10_lenet_modern_s43.json
+python train.py --model lenet_modern --dataset cifar10 --epochs 10 --seed 44 --no-augment --results-json results/c10_lenet_modern_s44.json
+python train.py --model alexnet --norm none --dataset cifar10 --epochs 10 --seed 43 --no-augment --results-json results/c10_alex_none_s43.json
+python train.py --model alexnet --norm none --dataset cifar10 --epochs 10 --seed 44 --no-augment --results-json results/c10_alex_none_s44.json
+python train.py --model alexnet --norm lrn --dataset cifar10 --epochs 10 --seed 43 --no-augment --results-json results/c10_alex_lrn_s43.json
+python train.py --model alexnet --norm lrn --dataset cifar10 --epochs 10 --seed 44 --no-augment --results-json results/c10_alex_lrn_s44.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10 --seed 43 --no-augment --results-json results/c10_alex_bn_s43.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10 --seed 44 --no-augment --results-json results/c10_alex_bn_s44.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 15 --seed 43 --no-augment --results-json results/c10_alex_bn_noaug15_s43.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 15 --seed 44 --no-augment --results-json results/c10_alex_bn_noaug15_s44.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 15 --seed 43 --results-json results/c10_alex_bn_aug15_s43.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 15 --seed 44 --results-json results/c10_alex_bn_aug15_s44.json
+
+# Extended ablation exploration (CIFAR-10)
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10 --lr 0.0001 --no-augment --results-json results/x_lr1e-4.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10 --lr 0.01 --no-augment --results-json results/x_lr1e-2.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10 --batch-size 64 --no-augment --results-json results/x_bs64.json
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10 --batch-size 256 --no-augment --results-json results/x_bs256.json
+python train.py --model alexnet --norm none --dataset cifar10 --epochs 10 --results-json results/x_none_aug.json
+python train.py --model lenet_modern --dataset cifar10 --epochs 10 --results-json results/x_modern_aug.json
+
+# Tooling outputs used in the report
+python demo_transforms.py
+python compare_models.py --dataset cifar10 --device cuda
+python -m utils.eda --dataset both
+python -m utils.visualization --plot-ablation
+
+# Evaluate a saved checkpoint
+python evaluate.py --checkpoint checkpoints/alexnet_bn.pth --model alexnet --norm bn --dataset cifar10

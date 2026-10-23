@@ -1,0 +1,66 @@
+========================================================================================
+ELEC 475: Lab 2 Training Engine
+Device        : cuda (Tesla T4)
+Model         : LENET (Norm: N/A)
+Dataset       : TINY_IMAGENET (Augmentation: False)
+Hyperparams   : Epochs=5, BatchSize=128, LR=0.001, Seed=42
+Early Stopping: Disabled
+========================================================================================
+
+Initializing DataLoaders...
+Train batches: 781 (100000 samples), Val batches: 79, Classes: 200
+============================================================
+Computational Complexity Profile: LENET (bn)
+Input Tensor Shape   : (1, 3, 64, 64)
+------------------------------------------------------------
+Total Parameters     : 354,636 (0.3546 M)
+Trainable Parameters : 354,636
+Multiply-Accumulates : 3,601,864 (3.60 MMACs)
+Floating Point Ops   : 7,203,728 (7.20 MFLOPs)
+Weight Size (FP32)   : 1.35 MB
+============================================================
+
+Detailed Layer Specification:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+LeNet5                                   [1, 200]                  --
+├─Sequential: 1-1                        [1, 16, 13, 13]           --
+│    └─Conv2d: 2-1                       [1, 6, 60, 60]            456
+│    └─Tanh: 2-2                         [1, 6, 60, 60]            --
+│    └─AvgPool2d: 2-3                    [1, 6, 30, 30]            --
+│    └─Conv2d: 2-4                       [1, 16, 26, 26]           2,416
+│    └─Tanh: 2-5                         [1, 16, 26, 26]           --
+│    └─AvgPool2d: 2-6                    [1, 16, 13, 13]           --
+├─Sequential: 1-2                        [1, 200]                  --
+│    └─Linear: 2-7                       [1, 120]                  324,600
+│    └─Tanh: 2-8                         [1, 120]                  --
+│    └─Linear: 2-9                       [1, 84]                   10,164
+│    └─Tanh: 2-10                        [1, 84]                   --
+│    └─Linear: 2-11                      [1, 200]                  17,000
+==========================================================================================
+Total params: 354,636
+Trainable params: 354,636
+Non-trainable params: 0
+Total mult-adds (Units.MEGABYTES): 3.63
+==========================================================================================
+Input size (MB): 0.05
+Forward/backward pass size (MB): 0.26
+Params size (MB): 1.42
+Estimated Total Size (MB): 1.73
+==========================================================================================
+
+==============================================================================================
+ Epoch  | Train Loss  | Train Acc (%)  |  Val Loss  | Val Acc (%)  | Val F1 (%)  | Time (s)  | Throughput
+----------------------------------------------------------------------------------------------
+   1    |   4.8086    |      5.08      |   4.6517   |     6.37     |    4.20     |   50.95   |  1962.6  s/s
+   2    |   4.5586    |      7.82      |   4.5179   |     8.13     |    5.93     |   50.90   |  1964.8  s/s
+   3    |   4.4346    |      9.28      |   4.4193   |     9.15     |    6.74     |   50.35   |  1986.0  s/s
+   4    |   4.3318    |     10.58      |   4.3601   |    10.34     |    8.19     |   51.34   |  1948.0  s/s
+   5    |   4.2469    |     11.55      |   4.3221   |    10.32     |    8.16     |   50.84   |  1967.0  s/s
+==============================================================================================
+Training completed in 254.37s.
+Best Val Accuracy: 10.34% | Best Val Macro F1: 8.19%
+Model Complexity : 0.355M Parameters | 7.20M FLOPs
+Results JSON saved to: results/t200_lenet.json
+Training curves successfully saved to: plots/loss_t200_lenet.png

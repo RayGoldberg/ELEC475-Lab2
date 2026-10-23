@@ -1,0 +1,60 @@
+{
+  "device": "cuda",
+  "dataset": "cifar10",
+  "input_size": [
+    1,
+    3,
+    64,
+    64
+  ],
+  "rows": [
+    {
+      "name": "1. LeNet-5 (Base)",
+      "params_m": 0.338486,
+      "macs_m": 3.585904,
+      "flops_m": 7.171808,
+      "latency_ms": 0.34358199991402216,
+      "throughput": 2910.513357074118
+    },
+    {
+      "name": "2. LeNet-Modern (ReLU+Pool)",
+      "params_m": 0.446006,
+      "macs_m": 4.59252,
+      "flops_m": 9.18504,
+      "latency_ms": 0.35567199847719166,
+      "throughput": 2811.579219847208
+    },
+    {
+      "name": "3. AlexNet-64 (None)",
+      "params_m": 6.608842,
+      "macs_m": 218.34752,
+      "flops_m": 436.69504,
+      "latency_ms": 2.1133509999344824,
+      "throughput": 473.182164264716
+    },
+    {
+      "name": "4. AlexNet-64 (LRN)",
+      "params_m": 6.608842,
+      "macs_m": 218.34752,
+      "flops_m": 436.69504,
+      "latency_ms": 1.9503480016282992,
+      "throughput": 512.7290099844355
+    },
+    {
+      "name": "5. AlexNet-64 (BatchNorm)",
+      "params_m": 6.611402,
+      "macs_m": 218.983168,
+      "flops_m": 437.966336,
+      "latency_ms": 1.5736419991299044,
+      "throughput": 635.4685503773529
+    },
+    {
+      "name": "6. Torchvision Zoo AlexNet",
+      "params_m": 57.04481,
+      "macs_m": 94.099392,
+      "flops_m": 188.198784,
+      "latency_ms": 1.9382410009711748,
+      "throughput": 515.9317130836362
+    }
+  ]
+}
