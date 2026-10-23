@@ -1,0 +1,12 @@
+data/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.submission_tmp/
+*.zip
+results_smoke/
+checkpoints/*.pth
+!checkpoints/lenet_baseline.pth
+!checkpoints/lenet_modern.pth
+!checkpoints/alexnet_bn.pth
